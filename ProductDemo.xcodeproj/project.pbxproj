@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE48C48A25C83963006DD0FD /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE48C48925C83963006DD0FD /* LoadingView.swift */; };
 		CE57ABE625C292BB001F72B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57ABE525C292BB001F72B2 /* AppDelegate.swift */; };
 		CE57ABE825C292BB001F72B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57ABE725C292BB001F72B2 /* SceneDelegate.swift */; };
 		CE57ABEA25C292BB001F72B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57ABE925C292BB001F72B2 /* ViewController.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE48C48925C83963006DD0FD /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CE57ABE225C292BB001F72B2 /* ProductDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE57ABE525C292BB001F72B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE57ABE725C292BB001F72B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			children = (
 				CE57AC2525C295F8001F72B2 /* ListCollectionViewCell.swift */,
 				CE57AC2625C295F8001F72B2 /* ListCollectionViewCell.xib */,
+				CE48C48925C83963006DD0FD /* LoadingView.swift */,
 			);
 			path = SecondView;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				CE57ACA225C6D468001F72B2 /* NetworkController.swift in Sources */,
 				CE57AC9825C5B53C001F72B2 /* DetailTableViewCell.swift in Sources */,
 				CE57AC5E25C29CD8001F72B2 /* ProductViewModel.swift in Sources */,
+				CE48C48A25C83963006DD0FD /* LoadingView.swift in Sources */,
 				CE57AC1A25C293BB001F72B2 /* SecondViewController.swift in Sources */,
 				CE57AC5925C29CA2001F72B2 /* ProductModel.swift in Sources */,
 				CE57AC2725C295F8001F72B2 /* ListCollectionViewCell.swift in Sources */,

@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct ProductModel: Decodable {
+struct DecodableModel: Decodable {
     
     var description: String?
     var copyright: String?
@@ -21,7 +21,8 @@ struct ProductModel: Decodable {
     
 }
 
-struct OkModel {
+struct ProductModel {
+    
     var description: String = ""
     var copyright: String = ""
     var title: String = ""
@@ -33,9 +34,9 @@ struct OkModel {
 }
 
 
-extension OkModel {
+extension ProductModel {
     
-    init(data: ProductModel) {
+    init(data: DecodableModel) {
         
         self.description = data.description ?? ""
         self.copyright = data.copyright ?? ""

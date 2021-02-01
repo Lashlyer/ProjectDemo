@@ -12,19 +12,17 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var listTabelView: UITableView!
     
-    fileprivate var detailData: OkModel?
+    fileprivate var detailData: ProductModel?
     
-    fileprivate var scrollView: UIScrollView?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         initView()
     }
     
     
     
-    func setValue(model: OkModel) {
+    func setValue(model: ProductModel) {
         
         self.detailData = model
         
@@ -33,6 +31,7 @@ class DetailViewController: UIViewController {
     
     private func initView() {
         
+        self.title = "DetailView"
         self.listTabelView.delegate = self
         self.listTabelView.dataSource = self
         self.listTabelView.separatorStyle = .none
@@ -59,9 +58,9 @@ extension DetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as? DetailTableViewCell else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as? DetailTableViewCell else { return UITableViewCell() }
         
-        cell.setValue(model: self.detailData ?? OkModel())
+        cell.setValue(model: self.detailData ?? ProductModel())
         return cell
     }
     

@@ -11,14 +11,14 @@ import Foundation
 class ProductViewModel {
     
     
-    var productData: [OkModel]?
+    var productData: [ProductModel]?
     
     var onRequestEnd: (() -> Void)?
     
     func prepareRequest() {
         
         guard let downloadUrl = URL(string: "https://raw.githubusercontent.com/cmmobile/NasaDataSet/main/apod.json") else { return }
-                
+        
         let request = URLRequest(url: downloadUrl)
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -26,21 +26,17 @@ class ProductViewModel {
             
             DispatchQueue.main.async {
                 
-                guard error == nil else { return }
-                
-                guard let datas = data else {
-                    
-                    return
-                }
-                
+                guard error == nil, let datas = data else { return }
+                            
                 do {
                     
                     let decoder = JSONDecoder()
-                    let classer = try decoder.decode([ProductModel].self, from: datas)
+                    let classer = try decoder.decode([DecodableModel].self, from: datas)
                     
-                    let dataArray = (0 ..< classer.count).map { (count) -> OkModel in
-                        return OkModel(data: classer[count])
+                    let dataArray = (0 ..< classer.count).map { (count) -> ProductModel in
+                        return ProductModel(data: classer[count])
                     }
+                    
                     self.productData = dataArray
                     self.onRequestEnd?()
                     
@@ -48,7 +44,6 @@ class ProductViewModel {
                     
                 }
             }
-
         }
         
         task.resume()

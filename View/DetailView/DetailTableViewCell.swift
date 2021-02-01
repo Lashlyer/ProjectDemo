@@ -14,25 +14,33 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var detailImageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     
-    fileprivate var data: OkModel?
+    fileprivate var data: ProductModel?
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.initView()
+    }
+    
+    private func initView() {
+        
         self.selectionStyle = .none
+        self.descriptionLabel.numberOfLines = 0
+        self.copyRightLabel.numberOfLines = 0
+        self.detailImageView.contentMode = .scaleToFill
+
     }
     
     
-    func setValue(model: OkModel) {
+    func setValue(model: ProductModel) {
+        
         self.data = model
-        self.descriptionLabel.numberOfLines = 0
-        self.copyRightLabel.numberOfLines = 0
+
         self.dateLabel.text = dateFomatterString(date: model.date)
         
         self.copyRightLabel.text = model.copyright
         self.descriptionLabel.text = model.description
         
         self.detailImageView.image = UIImage(named: "noimage")
-        self.detailImageView.contentMode = .scaleToFill
         
         guard let url = URL(string: model.url) else {return}
         NetworkController.shared.fetchImage(url: url) { [weak self] (image) in
@@ -46,7 +54,7 @@ class DetailTableViewCell: UITableViewCell {
     }
     
     
-    func dateFomatterString(date: String) -> String {
+    private func dateFomatterString(date: String) -> String {
         
         let dateFomatter = DateFormatter()
         dateFomatter.dateFormat = "yyyy-MM-dd"
@@ -54,7 +62,6 @@ class DetailTableViewCell: UITableViewCell {
         
         let dateFormatterForString = DateFormatter()
         dateFormatterForString.dateFormat = "YYYY MMM. d"
-        
         
         return(dateFormatterForString.string(from: date!))
         
@@ -64,7 +71,6 @@ class DetailTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
 }

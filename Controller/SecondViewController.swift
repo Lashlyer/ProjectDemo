@@ -11,8 +11,8 @@ class SecondViewController: UIViewController {
     
     private let productViewModel = ProductViewModel()
     
-    let imageCache = NSCache<NSURL, UIImage>()
-    
+    fileprivate var loadingView: UIView?
+        
     @IBOutlet weak var listCollectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -32,8 +32,14 @@ class SecondViewController: UIViewController {
             DispatchQueue.main.async {
                 
                 self.listCollectionView.reloadData()
+                
+                UIView.animate(withDuration: 0.5) {
+                    self.loadingView?.alpha = 0
+                } completion: {_ in
+                    self.loadingView?.isHidden = true
+                    
+                }
             }
-            
         }
     }
     
@@ -52,6 +58,10 @@ class SecondViewController: UIViewController {
         layout.minimumLineSpacing = 0
         layout.estimatedItemSize = .zero
         self.listCollectionView.collectionViewLayout = layout
+        
+        self.loadingView = LoadingView(uiview: self.view, color: .white, alpha: 1)
+        self.view.addSubview(loadingView ?? UIView())
+
     }
     
     
@@ -75,8 +85,7 @@ extension SecondViewController: UICollectionViewDataSource {
         
         guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCollectionViewCell", for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
         
-        item.itemImageView.image = nil
-        item.setUpValue(model: self.productViewModel.productData?[indexPath.row] ?? OkModel())
+        item.setUpValue(model: self.productViewModel.productData?[indexPath.row] ?? ProductModel())
 
         return item
     }
@@ -85,7 +94,7 @@ extension SecondViewController: UICollectionViewDataSource {
         
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         
-        detailVC.setValue(model: self.productViewModel.productData?[indexPath.row] ?? OkModel())
+        detailVC.setValue(model: self.productViewModel.productData?[indexPath.row] ?? ProductModel())
         
         self.navigationController?.pushViewController(detailVC, animated: true)
         

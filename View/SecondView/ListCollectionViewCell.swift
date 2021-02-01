@@ -13,22 +13,29 @@ class ListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var backView: UIView!
     
-    fileprivate var data: OkModel?
+    fileprivate var data: ProductModel?
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.titleLabel.numberOfLines = 0
-        self.itemImageView.contentMode = .scaleToFill
+        self.initView()
+
     }
     
     
-    func setUpValue(model: OkModel) {
+    private func initView() {
+        
+        self.titleLabel.numberOfLines = 0
+        self.itemImageView.contentMode = .scaleToFill
+        
+    }
+    
+    func setUpValue(model: ProductModel) {
+        
         self.data = model
         self.titleLabel.text = model.title
-        
         self.itemImageView.image = UIImage(named: "noimage")
         
-        guard let url = URL(string: model.url) else {return}
+        guard let url = URL(string: model.url) else { return }
         NetworkController.shared.fetchImage(url: url) { [weak self] (image) in
             guard let self = `self` else { return }
             DispatchQueue.main.async {
@@ -37,22 +44,5 @@ class ListCollectionViewCell: UICollectionViewCell {
                 }
             }
         }
-    }
-
-}
-
-
-extension CGFloat {
-    static func random() -> CGFloat {
-        return CGFloat(arc4random()) / CGFloat(UInt32.max)
-    }
-}
-
-extension UIColor {
-    static func random() -> UIColor {
-        return UIColor(red:   .random(),
-                       green: .random(),
-                       blue:  .random(),
-                       alpha: 1.0)
     }
 }

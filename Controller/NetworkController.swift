@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class NetworkController {
+    
     static let shared = NetworkController()
     
     let imageCache = NSCache<NSURL, UIImage>()
@@ -19,13 +20,16 @@ class NetworkController {
             completionHandler(image)
             return
         }
+        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let data = data, let image = UIImage(data: data) {
-                self.imageCache.setObject(image, forKey: url as NSURL)
-                completionHandler(image)
-            } else {
+            guard let data = data, let image = UIImage(data: data) else {
                 completionHandler(nil)
+                return
             }
+            
+            self.imageCache.setObject(image, forKey: url as NSURL)
+            completionHandler(image)
+            
         }.resume()
     }
 
