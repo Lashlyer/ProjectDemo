@@ -1,44 +1,39 @@
-//
-//  SecondViewController.swift
-//  ProductDemo
-//
-//  Created by Alvin on 2021/1/28.
-//
 
 import UIKit
 
 class SecondViewController: UIViewController {
     
-    private let productViewModel = ProductViewModel()
-    
+    private let productViewModel = ProductViewModel(ProductRespository(HttpRequest.shared))
+    private var productDatas: [ProductModel] = []
     fileprivate var loadingView: UIView?
-        
+    
     @IBOutlet weak var listCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.productViewModel.prepareRequest()
-        self.bindViewModel()
         self.initView()
+        self.bindViewModel()
     }
-    
+    deinit {
+        print("dadjoajdaojda")
+    }
     private func bindViewModel() {
         
-        productViewModel.onRequestEnd = { [weak self] in
-            
-            guard let self = `self` else { return }
-            
-            DispatchQueue.main.async {
-                
-                self.listCollectionView.reloadData()
+        self.productViewModel.prepareRequests { [weak self] result in
+            switch result {
+            case .data(let data):
+                self?.productDatas = data
+                self?.listCollectionView.reloadData()
                 
                 UIView.animate(withDuration: 0.5) {
-                    self.loadingView?.alpha = 0
+                    self?.loadingView?.alpha = 0
                 } completion: {_ in
-                    self.loadingView?.isHidden = true
+                    self?.loadingView?.isHidden = true
                     
                 }
+            case .error(let error):
+                print(error)
             }
         }
     }
@@ -61,7 +56,7 @@ class SecondViewController: UIViewController {
         
         self.loadingView = LoadingView(uiview: self.view, color: .white, alpha: 1)
         self.view.addSubview(loadingView ?? UIView())
-
+        
     }
     
     
@@ -77,7 +72,7 @@ extension SecondViewController: UICollectionViewDelegate {
 extension SecondViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.productViewModel.productData?.count ?? 0
+        return self.productDatas.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -85,8 +80,8 @@ extension SecondViewController: UICollectionViewDataSource {
         
         guard let item = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCollectionViewCell", for: indexPath) as? ListCollectionViewCell else { return UICollectionViewCell() }
         
-        item.setUpValue(model: self.productViewModel.productData?[indexPath.row] ?? ProductModel())
-
+        item.setUpValue(model: self.productDatas[indexPath.row] )
+        
         return item
     }
     
@@ -94,7 +89,7 @@ extension SecondViewController: UICollectionViewDataSource {
         
         guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else { return }
         
-        detailVC.setValue(model: self.productViewModel.productData?[indexPath.row] ?? ProductModel())
+        detailVC.setValue(model: self.productDatas[indexPath.row] )
         
         self.navigationController?.pushViewController(detailVC, animated: true)
         

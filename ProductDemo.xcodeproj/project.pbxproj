@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		276D31C227C8CB4C0025B50F /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D31C127C8CB4C0025B50F /* HttpRequest.swift */; };
+		276D31C427CDF4320025B50F /* ResultDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D31C327CDF4320025B50F /* ResultDecoder.swift */; };
+		276D31C627CDF4B70025B50F /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D31C527CDF4B70025B50F /* Status.swift */; };
+		276D31C927CE15EB0025B50F /* IProductRespository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276D31C827CE15EB0025B50F /* IProductRespository.swift */; };
 		CE48C48A25C83963006DD0FD /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE48C48925C83963006DD0FD /* LoadingView.swift */; };
 		CE57ABE625C292BB001F72B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57ABE525C292BB001F72B2 /* AppDelegate.swift */; };
 		CE57ABE825C292BB001F72B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57ABE725C292BB001F72B2 /* SceneDelegate.swift */; };
@@ -45,6 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		276D31C127C8CB4C0025B50F /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
+		276D31C327CDF4320025B50F /* ResultDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDecoder.swift; sourceTree = "<group>"; };
+		276D31C527CDF4B70025B50F /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		276D31C827CE15EB0025B50F /* IProductRespository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IProductRespository.swift; sourceTree = "<group>"; };
 		CE48C48925C83963006DD0FD /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CE57ABE225C292BB001F72B2 /* ProductDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE57ABE525C292BB001F72B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,9 +104,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		276D31C027C8CB370025B50F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				276D31C127C8CB4C0025B50F /* HttpRequest.swift */,
+				276D31C327CDF4320025B50F /* ResultDecoder.swift */,
+				276D31C527CDF4B70025B50F /* Status.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		276D31C727CE15C50025B50F /* Respository */ = {
+			isa = PBXGroup;
+			children = (
+				276D31C827CE15EB0025B50F /* IProductRespository.swift */,
+			);
+			path = Respository;
+			sourceTree = "<group>";
+		};
 		CE57ABD925C292BB001F72B2 = {
 			isa = PBXGroup;
 			children = (
+				276D31C727CE15C50025B50F /* Respository */,
+				276D31C027C8CB370025B50F /* Service */,
 				CE57AC5125C29C5C001F72B2 /* ViewModel */,
 				CE57AC4825C29B8A001F72B2 /* Model */,
 				CE57AC2425C295E2001F72B2 /* View */,
@@ -340,11 +368,15 @@
 			files = (
 				CE57ACA225C6D468001F72B2 /* NetworkController.swift in Sources */,
 				CE57AC9825C5B53C001F72B2 /* DetailTableViewCell.swift in Sources */,
+				276D31C427CDF4320025B50F /* ResultDecoder.swift in Sources */,
 				CE57AC5E25C29CD8001F72B2 /* ProductViewModel.swift in Sources */,
 				CE48C48A25C83963006DD0FD /* LoadingView.swift in Sources */,
 				CE57AC1A25C293BB001F72B2 /* SecondViewController.swift in Sources */,
+				276D31C927CE15EB0025B50F /* IProductRespository.swift in Sources */,
+				276D31C227C8CB4C0025B50F /* HttpRequest.swift in Sources */,
 				CE57AC5925C29CA2001F72B2 /* ProductModel.swift in Sources */,
 				CE57AC2725C295F8001F72B2 /* ListCollectionViewCell.swift in Sources */,
+				276D31C627CDF4B70025B50F /* Status.swift in Sources */,
 				CE57ABEA25C292BB001F72B2 /* ViewController.swift in Sources */,
 				CE57ABE625C292BB001F72B2 /* AppDelegate.swift in Sources */,
 				CE57ABE825C292BB001F72B2 /* SceneDelegate.swift in Sources */,
@@ -525,7 +557,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q4GS3M264F;
+				DEVELOPMENT_TEAM = DX545MP384;
 				INFOPLIST_FILE = ProductDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -544,7 +576,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Q4GS3M264F;
+				DEVELOPMENT_TEAM = DX545MP384;
 				INFOPLIST_FILE = ProductDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

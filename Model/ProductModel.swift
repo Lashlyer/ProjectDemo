@@ -1,27 +1,7 @@
-//
-//  ProductModel.swift
-//  ProductDemo
-//
-//  Created by Alvin on 2021/1/28.
-//
 
 import Foundation
 
-
-struct DecodableModel: Decodable {
-    
-    var description: String?
-    var copyright: String?
-    var title: String?
-    var url: String?
-    var apod_site: String?
-    var date: String?
-    var media_type: String?
-    var hdurl: String?
-    
-}
-
-struct ProductModel {
+struct ProductModel: Codable {
     
     var description: String = ""
     var copyright: String = ""
@@ -31,20 +11,29 @@ struct ProductModel {
     var date: String = ""
     var mediaType: String = ""
     var hdUrl: String = ""
-}
-
-
-extension ProductModel {
     
-    init(data: DecodableModel) {
-        
-        self.description = data.description ?? ""
-        self.copyright = data.copyright ?? ""
-        self.title = data.title ?? ""
-        self.url = data.url ?? ""
-        self.apodSite = data.apod_site ?? ""
-        self.date = data.date ?? ""
-        self.mediaType = data.media_type ?? ""
-        self.hdUrl = data.hdurl ?? ""
+    enum CodingKeys: String, CodingKey {
+        case description
+        case copyright
+        case title
+        case url
+        case apodSite = "apod_site"
+        case date
+        case mediaType = "media_type"
+        case hdUrl
+    }
+    
+    init() {}
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        description = try container.decodeIfPresent(String.self, forKey: .description) ?? ""
+        copyright = try container.decodeIfPresent(String.self, forKey: .copyright) ?? ""
+        title = try container.decodeIfPresent(String.self, forKey: .title) ?? ""
+        url = try container.decodeIfPresent(String.self, forKey: .url) ?? ""
+        apodSite = try container.decodeIfPresent(String.self, forKey: .apodSite) ?? ""
+        date = try container.decodeIfPresent(String.self, forKey: .date) ?? ""
+        mediaType = try container.decodeIfPresent(String.self, forKey: .mediaType) ?? ""
+        hdUrl = try container.decodeIfPresent(String.self, forKey: .hdUrl) ?? ""
     }
 }

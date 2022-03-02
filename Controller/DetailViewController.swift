@@ -1,9 +1,3 @@
-//
-//  DetailViewController.swift
-//  ProductDemo
-//
-//  Created by Alvin on 2021/1/30.
-//
 
 import UIKit
 
